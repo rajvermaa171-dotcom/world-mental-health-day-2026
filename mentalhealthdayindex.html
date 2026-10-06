@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy World Mental Health Day 2026 💚</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <style>
+        * {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: linear-gradient(135deg, #e0f2fe 0%, #f0fdf4 40%, #fff7ed 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+        }
+
+        /* 3D Tactile Arcade Buzzer Button Styling */
+        .buzzer-btn {
+            position: relative;
+            transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+            user-select: none;
+        }
+
+        /* Smile Red/Rose Buzzer */
+        .buzzer-red {
+            background: linear-gradient(180deg, #ff4b4b 0%, #dc2626 100%);
+            box-shadow: 0 8px 0 #991b1b, 0 15px 20px rgba(220, 38, 38, 0.35);
+        }
+        .buzzer-red:active, .buzzer-red.active-buzzer {
+            transform: translateY(6px);
+            box-shadow: 0 2px 0 #991b1b, 0 5px 10px rgba(220, 38, 38, 0.25);
+        }
+
+        /* Motivation Amber/Yellow Buzzer */
+        .buzzer-yellow {
+            background: linear-gradient(180deg, #fbbf24 0%, #d97706 100%);
+            box-shadow: 0 8px 0 #92400e, 0 15px 20px rgba(217, 119, 6, 0.35);
+        }
+        .buzzer-yellow:active, .buzzer-yellow.active-buzzer {
+            transform: translateY(6px);
+            box-shadow: 0 2px 0 #92400e, 0 5px 10px rgba(217, 119, 6, 0.25);
+        }
+
+        /* Peace Green Buzzer */
+        .buzzer-green {
+            background: linear-gradient(180deg, #34d399 0%, #059669 100%);
+            box-shadow: 0 8px 0 #065f46, 0 15px 20px rgba(5, 150, 105, 0.35);
+        }
+        .buzzer-green:active, .buzzer-green.active-buzzer {
+            transform: translateY(6px);
+            box-shadow: 0 2px 0 #065f46, 0 5px 10px rgba(5, 150, 105, 0.25);
+        }
+
+        /* Inner Reflection Sheen for Buzzers */
+        .buzzer-btn::before {
+            content: '';
+            position: absolute;
+            top: 6px;
+            left: 12%;
+            right: 12%;
+            height: 30%;
+            background: rgba(255, 255, 255, 0.35);
+            border-radius: 9999px;
+            pointer-events: none;
+        }
+
+        /* Floating Falling Emoji Animation Canvas Container */
+        #emoji-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 50;
+        }
+
+        /* Breathing Circle Pulse */
+        .breathe-target {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(52,211,153,0.9) 0%, rgba(16,185,129,0.5) 65%, rgba(5,150,105,0.15) 100%);
+            box-shadow: 0 0 35px rgba(16,185,129,0.4);
+            transition: transform 0.2s ease-out;
+        }
+    </style>
+</head>
+<body class="p-3 sm:p-5 md:p-8 flex flex-col justify-between items-center relative min-h-screen">
+
+    <!-- Falling Emoji Canvas -->
+    <canvas id="emoji-canvas"></canvas>
+
+    <!-- Main Container -->
+    <div class="max-w-xl w-full mx-auto space-y-6 relative z-10 my-auto">
+        
+        <!-- Header Section -->
+        <header class="text-center space-y-3 glass-card rounded-3xl p-6 shadow-xl border border-emerald-100">
+            <!-- Program Badge -->
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-100/90 text-emerald-900 text-xs sm:text-sm font-bold tracking-wide shadow-sm">
+                <span>🧠</span> Campus Well-Being Celebration
+            </div>
+
+            <!-- Main Greeting -->
+            <h1 class="text-2xl sm:text-3xl md:text-4xl font-black text-slate-800 leading-tight">
+                Happy World Mental Health Day 2026! 💚
+            </h1>
+
+            <!-- Official Theme Banner -->
+            <div class="bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 text-white p-3.5 rounded-2xl shadow-md space-y-1">
+                <p class="text-[10px] sm:text-xs uppercase tracking-widest font-extrabold text-emerald-200">
+                    Official College Program Theme
+                </p>
+                <p class="text-sm sm:text-base font-extrabold leading-snug">
+                    "Lived Experiences Heard: Real Voices, Real Change"
+                </p>
+            </div>
+
+            <!-- Welcome Message -->
+            <p class="text-slate-600 font-medium text-xs sm:text-sm pt-1">
+                Welcome! Tap any buzzer below to unlock your instant mental health boost today. ✨
+            </p>
+        </header>
+
+        <!-- 3D Arcade Buzzer Buttons Section -->
+        <section class="space-y-3">
+            <h2 class="text-center font-extrabold text-slate-700 text-xs sm:text-sm uppercase tracking-wider">
+                👇 PRESS A BUZZER TO SELECT YOUR VIBE 👇
+            </h2>
+
+            <div class="grid grid-cols-3 gap-3 sm:gap-4 pt-1">
+                <!-- Smile Buzzer -->
+                <button id="btn-smile" onclick="triggerBuzzer('smile')" class="buzzer-btn buzzer-red text-white py-4 sm:py-5 px-2 rounded-2xl flex flex-col items-center justify-center gap-1">
+                    <span class="text-2xl sm:text-3xl">😃</span>
+                    <span class="text-xs sm:text-sm font-black tracking-tight text-center leading-tight">I Need a<br/>Smile</span>
+                </button>
+
+                <!-- Motivation Buzzer -->
+                <button id="btn-motivation" onclick="triggerBuzzer('motivation')" class="buzzer-btn buzzer-yellow text-white py-4 sm:py-5 px-2 rounded-2xl flex flex-col items-center justify-center gap-1">
+                    <span class="text-2xl sm:text-3xl">💪</span>
+                    <span class="text-xs sm:text-sm font-black tracking-tight text-center leading-tight">I Need<br/>Motivation</span>
+                </button>
+
+                <!-- Peace Buzzer -->
+                <button id="btn-peace" onclick="triggerBuzzer('peace')" class="buzzer-btn buzzer-green text-white py-4 sm:py-5 px-2 rounded-2xl flex flex-col items-center justify-center gap-1">
+                    <span class="text-2xl sm:text-3xl">🧘‍♂️</span>
+                    <span class="text-xs sm:text-sm font-black tracking-tight text-center leading-tight">I Need<br/>Peace</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Dynamic Content Display Container -->
+        <main id="contentContainer" class="glass-card rounded-3xl p-5 sm:p-6 shadow-2xl transition-all duration-300 min-h-[280px] flex items-center justify-center">
+            
+            <!-- Default Welcome Placeholder -->
+            <div id="defaultPrompt" class="text-center space-y-3 p-4">
+                <div class="text-4xl animate-bounce">👇</div>
+                <p class="text-slate-700 font-bold text-base sm:text-lg">
+                    Press any buzzer above to get your custom mental health boost!
+                </p>
+                <p class="text-slate-500 text-xs">
+                    Get relatable memes, positive student affirmations, or a quick 15s breathing reset.
+                </p>
+            </div>
+
+            <!-- OPTION 1: SMILE CONTENT (Memes & Bollywood Jokes) -->
+            <div id="smileCard" class="hidden w-full space-y-4">
+                <div class="flex items-center justify-between border-b border-rose-200/80 pb-3">
+                    <span class="bg-rose-100 text-rose-800 text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider">
+                        😂 Desi College Relatable Memes
+                    </span>
+                    <span id="memeCounter" class="text-xs font-bold text-rose-600">Meme 1 of 4</span>
+                </div>
+
+                <!-- Meme Card Box -->
+                <div class="bg-rose-50/90 rounded-2xl p-4 sm:p-5 border border-rose-200 space-y-3 text-center min-h-[160px] flex flex-col justify-center items-center">
+                    <p id="memeTopText" class="text-xs sm:text-sm font-black uppercase text-rose-950 tracking-wide"></p>
+                    <div id="memeVisual" class="my-2 p-3 bg-white rounded-xl shadow-sm border border-rose-100 text-3xl sm:text-4xl"></div>
+                    <p id="memeBottomText" class="text-sm sm:text-base font-bold text-slate-800 italic"></p>
+                    <span id="memeTag" class="inline-block text-[11px] font-extrabold text-rose-700 bg-rose-200/70 px-2.5 py-0.5 rounded-full"></span>
+                </div>
+
+                <button onclick="nextMeme()" class="w-full py-3 bg-rose-500 hover:bg-rose-600 active:scale-95 text-white font-black text-sm rounded-xl transition-all shadow-md flex items-center justify-center gap-2">
+                    <span>Next Meme / Joke</span> 🔄
+                </button>
+            </div>
+
+            <!-- OPTION 2: MOTIVATION CONTENT (Affirmations & Quotes) -->
+            <div id="motivationCard" class="hidden w-full space-y-4">
+                <div class="flex items-center justify-between border-b border-amber-200/80 pb-3">
+                    <span class="bg-amber-100 text-amber-900 text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider">
+                        ✨ Real Voices, Real Strength
+                    </span>
+                    <span class="text-xs font-bold text-amber-700">Daily Affirmation</span>
+                </div>
+
+                <!-- Quote Card Box -->
+                <div class="bg-amber-50/90 rounded-2xl p-5 border border-amber-200 space-y-3 text-center min-h-[160px] flex flex-col justify-center items-center">
+                    <div class="text-3xl">🌟</div>
+                    <blockquote id="affirmationText" class="text-base sm:text-lg font-black text-amber-950 leading-snug"></blockquote>
+                    <p id="quoteContext" class="text-xs font-bold text-amber-700"></p>
+                </div>
+
+                <button onclick="nextAffirmation()" class="w-full py-3 bg-amber-500 hover:bg-amber-600 active:scale-95 text-white font-black text-sm rounded-xl transition-all shadow-md flex items-center justify-center gap-2">
+                    <span>New Affirmation</span> 💡
+                </button>
+            </div>
+
+            <!-- OPTION 3: PEACE CONTENT (15s Guided Breathing & 5-4-3-2-1 Reset) -->
+            <div id="peaceCard" class="hidden w-full space-y-4 text-center">
+                <div class="flex items-center justify-between border-b border-emerald-200/80 pb-3">
+                    <span class="bg-emerald-100 text-emerald-900 text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider">
+                        🧘‍♂️ 15-Second Zen & Grounding
+                    </span>
+                    <span class="text-xs font-bold text-emerald-700">Mindful Pause</span>
+                </div>
+
+                <!-- Breathing Animation Widget -->
+                <div class="flex flex-col items-center justify-center py-2 space-y-3">
+                    <div class="relative flex items-center justify-center my-1">
+                        <div id="breatheCircle" class="breathe-target flex items-center justify-center text-emerald-950 font-extrabold text-sm sm:text-base text-center p-2">
+                            <span id="breatheStatus">Tap Start</span>
+                        </div>
+                    </div>
+
+                    <p id="breathTimerDisplay" class="text-xs font-bold text-slate-500">Unwind your mind from exams & stress</p>
+
+                    <button id="startBreathBtn" onclick="runBreathingCycle()" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-black text-sm rounded-xl transition-all shadow-md">
+                        Start 15s Breathing Exercise 🫁
+                    </button>
+                </div>
+
+                <!-- Grounding Technique Tip -->
+                <div class="bg-emerald-50 rounded-xl p-3 text-left border border-emerald-200/70 text-xs text-emerald-900 space-y-1">
+                    <p class="font-bold flex items-center gap-1"><span>🌱</span> Quick Grounding Tip (5-4-3-2-1):</p>
+                    <p class="text-[11px] text-emerald-800">Acknowledge 5 things you can see around you right now, 4 things you can touch, 3 things you hear, 2 you smell, and 1 slow breath.</p>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- College Program Announcement & Cheer Footer -->
+        <footer class="glass-card rounded-3xl p-5 shadow-xl border border-purple-100 text-center space-y-4">
+            <div class="space-y-1">
+                <span class="inline-block px-3 py-1 bg-purple-100 text-purple-900 rounded-full text-xs font-black uppercase tracking-wide">
+                    📣 College Program Invitation
+                </span>
+                <h3 class="text-lg sm:text-xl font-black text-slate-800">
+                    World Mental Health Day Celebration
+                </h3>
+            </div>
+
+            <!-- Program Details Box -->
+            <div class="bg-purple-50/90 rounded-2xl p-3.5 text-xs sm:text-sm text-purple-950 font-medium space-y-1.5 border border-purple-200/70">
+                <p class="font-black text-purple-900">
+                    📅 Monday, 12th October 2026
+                </p>
+                <p class="font-semibold">
+                    📍 College Main Auditorium | ⏰ 10:00 AM Onwards
+                </p>
+                <p class="text-purple-700 text-xs italic font-bold pt-1">
+                    Join us for student speeches, panel discussions, real stories, and interactive fun!
+                </p>
+            </div>
+
+            <!-- Interactive Cheer Button -->
+            <button id="cheerBtn" onclick="sendCheer()" class="w-full py-3 bg-gradient-to-r from-rose-500 to-purple-600 hover:from-rose-600 hover:to-purple-700 active:scale-95 text-white font-black text-sm rounded-xl transition-all shadow-lg flex items-center justify-center gap-2">
+                <span>❤️ Send a Smile / Cheer</span>
+                <span class="bg-white/20 px-2.5 py-0.5 rounded-full text-xs" id="cheerCounter">247</span>
+            </button>
+        </footer>
+
+    </div>
+
+    <script>
+        /* -------------------------------------------------------------
+           1. FALLING EMOJI SHOWER SYSTEM
+           ------------------------------------------------------------- */
+        const canvas = document.getElementById('emoji-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        const emojiList = ['😊', '🧠', '✨', '💛', '💚', '🌈', '🌸', '😃', '🧘‍♂️', '💪', '🥳'];
+        let particles = [];
+
+        class EmojiParticle {
+            constructor(x, y, emoji = null) {
+                this.x = x || Math.random() * width;
+                this.y = y || -20;
+                this.emoji = emoji || emojiList[Math.floor(Math.random() * emojiList.length)];
+                this.size = Math.random() * 20 + 20;
+                this.speedY = Math.random() * 2 + 1.5;
+                this.speedX = (Math.random() - 0.5) * 1.5;
+                this.rotation = Math.random() * 360;
+                this.rotSpeed = (Math.random() - 0.5) * 2;
+                this.opacity = 1;
+            }
+
+            update() {
+                this.y += this.speedY;
+                this.x += this.speedX;
+                this.rotation += this.rotSpeed;
+                if (this.y > height) {
+                    this.opacity -= 0.02;
+                }
+            }
+
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate((this.rotation * Math.PI) / 180);
+                ctx.font = `${this.size}px serif`;
+                ctx.globalAlpha = Math.max(0, this.opacity);
+                ctx.fillText(this.emoji, 0, 0);
+                ctx.restore();
+            }
+        }
+
+        function triggerEmojiShower(count = 30) {
+            for (let i = 0; i < count; i++) {
+                setTimeout(() => {
+                    particles.push(new EmojiParticle());
+                }, i * 60);
+            }
+        }
+
+        function animateCanvas() {
+            ctx.clearRect(0, 0, width, height);
+            for (let i = particles.length - 1; i >= 0; i--) {
+                particles[i].update();
+                particles[i].draw();
+                if (particles[i].opacity <= 0 || particles[i].y > height + 50) {
+                    particles.splice(i, 1);
+                }
+            }
+            requestAnimationFrame(animateCanvas);
+        }
+
+        // Run continuous gentle ambient emojis + start animation loop
+        animateCanvas();
+        triggerEmojiShower(20);
+
+        /* -------------------------------------------------------------
+           2. DATASETS (MEMES & MOTIVATIONAL AFFIRMATIONS)
+           ------------------------------------------------------------- */
+        const studentMemes = [
+            {
+                top: "WHEN SYLLABUS IS 100 PAGES & TIME LEFT IS 2 HOURS...",
+                visual: "😱📚☕",
+                bottom: "Me reminding myself: 'Pehle dimaag thand, baaki sab baad mein!'",
+                tag: "#BhoolBhulaiyaaVibes #ExamStress"
+            },
+            {
+                top: "EXTERNAL EXAMINER: 'DEFINE YOUR PROJECT IN 2 WORDS'",
+                visual: "😬🙏🏽💯",
+                bottom: "Me: 'Chill Baba, Chill!' ...It works... hopefully!",
+                tag: "#VivaLife #CollegeDiaries"
+            },
+            {
+                top: "WHEN ATTENDANCE IS 74.9% & PROFESSOR ENTERS THE CLASS",
+                visual: "🤫👀✨",
+                bottom: "'Zor zor se bolke sabko scheme bata de!' Proxy lag jayegi!",
+                tag: "#PhirHeraPheri #AttendancePanic"
+            },
+            {
+                top: "WALKING OUT OF THE EXAM HALL KNOWING YOU ANSWERED ON VIBES",
+                visual: "😎🫱🏽‍🫲̃🌸",
+                bottom: "'Jo hoga dekha jayega, abhi dimag ko shanti chahiye!'",
+                tag: "#MirzapurPeace #SelfCare"
+            }
+        ];
+
+        const affirmations = [
+            { text: "Your grades reflect your performance in a test, NOT your value as a human being.", context: "— College Mental Health Mantra" },
+            { text: "Taking a break is not quitting. It is refueling your mind for the road ahead.", context: "— Real Voices, Real Change" },
+            { text: "It is okay to ask for help when your mental battery is running low. You are never alone.", context: "— World Mental Health Day 2026" },
+            { text: "You have survived 100% of your hardest exam days so far. You've got this!", context: "— Student Resilience" },
+            { text: "Small progress every day adds up to big results. Be kind to yourself.", context: "— Daily Peace Affirmation" }
+        ];
+
+        let currentMemeIdx = 0;
+        let currentAffirmationIdx = 0;
+        let cheerCount = 247;
+
+        /* -------------------------------------------------------------
+           3. INTERACTIVE BUZZER LOGIC
+           ------------------------------------------------------------- */
+        function triggerBuzzer(vibe) {
+            // Visual feedback on buzzer
+            document.querySelectorAll('.buzzer-btn').forEach(b => b.classList.remove('active-buzzer'));
+            const activeBtn = document.getElementById(`btn-${vibe}`);
+            if (activeBtn) activeBtn.classList.add('active-buzzer');
+
+            // Hide default prompt
+            document.getElementById('defaultPrompt').classList.add('hidden');
+
+            // Hide all content cards
+            document.getElementById('smileCard').classList.add('hidden');
+            document.getElementById('motivationCard').classList.add('hidden');
+            document.getElementById('peaceCard').classList.add('hidden');
+
+            // Trigger emoji shower on tap
+            triggerEmojiShower(25);
+
+            // Confetti burst
+            if (window.confetti) {
+                confetti({
+                    particleCount: 40,
+                    spread: 60,
+                    origin: { y: 0.6 }
+                });
+            }
+
+            // Display selected card content
+            if (vibe === 'smile') {
+                document.getElementById('smileCard').classList.remove('hidden');
+                displayMeme();
+            } else if (vibe === 'motivation') {
+                document.getElementById('motivationCard').classList.remove('hidden');
+                displayAffirmation();
+            } else if (vibe === 'peace') {
+                document.getElementById('peaceCard').classList.remove('hidden');
+            }
+        }
+
+        // Meme Switcher
+        function displayMeme() {
+            const item = studentMemes[currentMemeIdx];
+            document.getElementById('memeTopText').innerText = item.top;
+            document.getElementById('memeVisual').innerText = item.visual;
+            document.getElementById('memeBottomText').innerText = item.bottom;
+            document.getElementById('memeTag').innerText = item.tag;
+            document.getElementById('memeCounter').innerText = `Meme ${currentMemeIdx + 1} of ${studentMemes.length}`;
+        }
+
+        function nextMeme() {
+            currentMemeIdx = (currentMemeIdx + 1) % studentMemes.length;
+            displayMeme();
+            triggerEmojiShower(15);
+        }
+
+        // Affirmation Switcher
+        function displayAffirmation() {
+            const item = affirmations[currentAffirmationIdx];
+            document.getElementById('affirmationText').innerText = `"${item.text}"`;
+            document.getElementById('quoteContext').innerText = item.context;
+        }
+
+        function nextAffirmation() {
+            currentAffirmationIdx = (currentAffirmationIdx + 1) % affirmations.length;
+            displayAffirmation();
+            triggerEmojiShower(15);
+        }
+
+        /* -------------------------------------------------------------
+           4. GUIDED 15-SECOND BREATHING EXERCISE
+           ------------------------------------------------------------- */
+        let breathInterval = null;
+
+        function runBreathingCycle() {
+            const circle = document.getElementById('breatheCircle');
+            const status = document.getElementById('breatheStatus');
+            const timer = document.getElementById('breathTimerDisplay');
+            const btn = document.getElementById('startBreathBtn');
+
+            btn.disabled = true;
+            btn.classList.add('opacity-50', 'cursor-not-allowed');
+
+            let seconds = 15;
+            timer.innerText = `Session in progress: ${seconds}s remaining`;
+
+            function cycle() {
+                // Inhale phase (4 seconds)
+                status.innerText = "Inhale...";
+                circle.style.transform = "scale(1.45)";
+                circle.style.transition = "transform 4s cubic-bezier(0.4, 0, 0.2, 1)";
+
+                setTimeout(() => {
+                    if (seconds <= 0) return;
+                    // Hold phase (3 seconds)
+                    status.innerText = "Hold...";
+
+                    setTimeout(() => {
+                        if (seconds <= 0) return;
+                        // Exhale phase (4 seconds)
+                        status.innerText = "Exhale...";
+                        circle.style.transform = "scale(1.0)";
+                        circle.style.transition = "transform 4s cubic-bezier(0.4, 0, 0.2, 1)";
+                    }, 3000);
+                }, 4000);
+            }
+
+            cycle();
+
+            if (breathInterval) clearInterval(breathInterval);
+
+            breathInterval = setInterval(() => {
+                seconds--;
+                if (seconds > 0) {
+                    timer.innerText = `Session in progress: ${seconds}s remaining`;
+                } else {
+                    clearInterval(breathInterval);
+                    status.innerText = "Peaceful ✨";
+                    circle.style.transform = "scale(1.0)";
+                    timer.innerText = "Well done! You brought calm to your mind today.";
+                    btn.disabled = false;
+                    btn.classList.remove('opacity-50', 'cursor-not-allowed');
+                    triggerEmojiShower(30);
+                }
+            }, 1000);
+        }
+
+        /* -------------------------------------------------------------
+           5. INTERACTIVE CHEER BUTTON
+           ------------------------------------------------------------- */
+        function sendCheer() {
+            cheerCount++;
+            document.getElementById('cheerCounter').innerText = cheerCount;
+            
+            // Send burst of heart/star emojis
+            triggerEmojiShower(20);
+
+            if (window.confetti) {
+                confetti({
+                    particleCount: 35,
+                    scalar: 0.9,
+                    spread: 50,
+                    origin: { y: 0.85 },
+                    colors: ['#f43f5e', '#a855f7', '#10b981', '#f59e0b']
+                });
+            }
+        }
+    </script>
+</body>
+</html>
